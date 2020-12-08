@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { Input, Radio, RadioGroup, SlideFade, Stack } from "@chakra-ui/react";
+import {
+  Box,
+  Input,
+  Radio,
+  RadioGroup,
+  SlideFade,
+  Stack,
+} from "@chakra-ui/react";
 
 export const RadioBoxForm = ({ inputOptions, radioBox, onChange, name }) => {
   const [showInput, setShowInput] = useState(false);
@@ -18,14 +25,28 @@ export const RadioBoxForm = ({ inputOptions, radioBox, onChange, name }) => {
         <RadioGroup mt="1rem">
           <Stack>
             {inputOptions.map((option) => (
-              <Radio
+              <Box
                 key={option.id}
-                name={name}
-                onChange={handleChange}
-                value={option.option}
+                _hover={{ bg: "#4b4b4b" }}
+                rounded="md"
+                py="0.3rem"
+                px="1rem"
+                mt="1rem"
+                border="1px solid white"
+                w="40vw"
               >
-                {option.option}
-              </Radio>
+                <Radio
+                  w="100%"
+                  colorScheme="red"
+                  name={name}
+                  onChange={handleChange}
+                  value={option.option}
+                >
+                  <Box w="38vw" cursor="pointer" zIndex="1">
+                    {option.option}
+                  </Box>
+                </Radio>
+              </Box>
             ))}
             {showInput && (
               <SlideFade in={showInput} offsetY="-20px">
@@ -34,6 +55,11 @@ export const RadioBoxForm = ({ inputOptions, radioBox, onChange, name }) => {
                   placeholder="Escribe aqui tu respuesta..."
                   onChange={onChange}
                   name={name}
+                  autoFocus
+                  size="lg"
+                  variant="flushed"
+                  fontSize="1.2rem"
+                  focusBorderColor="red.300"
                 />
               </SlideFade>
             )}

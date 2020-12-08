@@ -5,6 +5,7 @@ import { GraphQLClient, ClientContext } from "graphql-hooks";
 import App from "./App";
 import "./index.css";
 import { ChakraProvider } from "@chakra-ui/react";
+import { BrowserRouter } from "react-router-dom";
 
 const client = new GraphQLClient({
   url: "https://graphql.datocms.com/",
@@ -16,9 +17,11 @@ const client = new GraphQLClient({
 ReactDOM.render(
   <React.StrictMode>
     <ClientContext.Provider value={client}>
-      <ChakraProvider>
-        <App />
-      </ChakraProvider>
+      <BrowserRouter>
+        <ChakraProvider>
+          <App />
+        </ChakraProvider>
+      </BrowserRouter>
     </ClientContext.Provider>
   </React.StrictMode>,
   document.getElementById("root")

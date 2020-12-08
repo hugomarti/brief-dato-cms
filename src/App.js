@@ -1,8 +1,9 @@
 import React from "react";
 import { useQuery } from "graphql-hooks";
 
-import { FormQuestions } from "./components/FormQuestions";
-import { LoadingSpinner } from "./components/LoadingSpiner";
+import { FormQuestions } from "./components/Pages/FormQuestions";
+import { LoadingSpinner } from "./components/PageComponents/LoadingSpiner";
+import { Box } from "@chakra-ui/react";
 
 const HOMEPAGE_QUERY = `query MyQuery {
   allBrief1s(first: 100) {
@@ -30,13 +31,13 @@ function App() {
   if (error) return "Something Bad Happened";
 
   return (
-    <React.Fragment>
+    <Box fontFamily="Futura">
       {loading ? (
         <LoadingSpinner />
       ) : (
         <FormQuestions questions={data.allBrief1s} />
       )}
-    </React.Fragment>
+    </Box>
   );
 }
 export default App;

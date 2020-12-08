@@ -1,7 +1,7 @@
 import React from "react";
 import { Flex, Input } from "@chakra-ui/react";
 
-export const InputTextForm = ({ inputText, onChange, name }) => {
+export const InputTextForm = ({ inputText, onChange, name, onKeyDown }) => {
   return (
     <React.Fragment>
       {inputText && (
@@ -10,6 +10,13 @@ export const InputTextForm = ({ inputText, onChange, name }) => {
             placeholder="Escribe aqui tu respuesta..."
             onChange={onChange}
             name={name}
+            onKeyDown={onKeyDown}
+            autoFocus
+            size="lg"
+            mt="1rem"
+            variant="flushed"
+            fontSize="1.2rem"
+            focusBorderColor="red.300"
           />
         </Flex>
       )}
