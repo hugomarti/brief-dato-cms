@@ -10,17 +10,24 @@ export const FormQuestions = ({ questions }) => {
     initialFormValues[field.title] = field.checkbox ? [] : "";
   });
 
-  const updatedData = questions.map((question, index) => ({
-    ...question,
-    route: question.title
-      .replace(/\s+/g, "-")
-      .toLowerCase()
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "")
-      .replace(/!+$/, "")
-      .replace(/¡+/g, ""),
-    questionNumber: index + 1,
-  }));
+  const updatedData = questions.map((question, index, elements) => {
+    var next = elements[index + 1];
+
+    return {
+      ...question,
+      route: question.title
+        .replace(/\s+/g, "-")
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/!+$/, "")
+        .replace(/¡+/g, "")
+        .replace(/,+/g, ""),
+      questionNumber: index + 1,
+    };
+  });
+  console.log(updatedData);
+
   const lastQuestion = updatedData.slice(-1)[0];
 
   return (
