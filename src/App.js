@@ -1,25 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { useQuery } from "graphql-hooks";
+
+import { FormQuestions } from "./components/FormQuestions";
+import { LoadingSpinner } from "./components/LoadingSpiner";
+
+const HOMEPAGE_QUERY = `query MyQuery {
+  allBrief1s(first: 100) {
+    id
+    required
+    title
+    subtitle
+    inputText
+    checkbox
+    radioBox
+    attachDoc
+    inputOptions {
+      id
+      option
+    }
+  }
+}`;
 
 function App() {
+  const { loading, error, data } = useQuery(HOMEPAGE_QUERY, {
+    variables: {
+      limit: 30,
+    },
+  });
+  if (error) return "Something Bad Happened";
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <React.Fragment>
+      {loading ? (
+        <LoadingSpinner />
+      ) : (
+        <FormQuestions questions={data.allBrief1s} />
+      )}
+    </React.Fragment>
   );
 }
-
 export default App;
