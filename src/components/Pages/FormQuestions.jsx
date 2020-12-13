@@ -2,7 +2,6 @@ import React from "react";
 import { Flex } from "@chakra-ui/react";
 import { Form, Formik } from "formik";
 import { Route, useHistory } from "react-router-dom";
-// import * as Yup from "yup";
 
 import { Question } from "../PageComponents/Question";
 import { HeroBrief } from "./HeroBrief";
@@ -15,28 +14,6 @@ export const FormQuestions = ({ questions }) => {
   questions.forEach((field) => {
     initialFormValues[field.title] = field.checkbox ? [] : "";
   });
-
-  // let validationSchema = Yup.object().shape(
-  //   questions.map((question) =>
-  //     question.required
-  //       ? (question.title = Yup.string().required())
-  //       : (question.title = Yup.string())
-  //   )
-  // );
-
-  // let validationSchema = Yup.object().shape({});
-  // questions.forEach((field) => {
-  //   if (field.required) {
-  //     validationSchema[field.title] = Yup.string().required();
-  //   } else {
-  //     validationSchema[field.title] = Yup.string();
-  //   }
-  // });
-  // const validationSchema = questions.map((question) => ({
-  //   ...question,
-  //   [question.title]: Yup.string().required,
-  // }));
-  // console.log(validationSchema);
 
   const updatedData = questions.map((question, index) => ({
     ...question,
@@ -54,7 +31,6 @@ export const FormQuestions = ({ questions }) => {
       </Route>
       <Formik
         initialValues={initialFormValues}
-        // validationSchema={validationSchema}
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
             console.log(JSON.stringify(values, null, 2));
@@ -63,7 +39,7 @@ export const FormQuestions = ({ questions }) => {
           }, 400);
         }}
       >
-        {({ handleChange, handleSubmit, isSubmitting, errors }) => {
+        {({ handleChange, handleSubmit, isSubmitting }) => {
           const handleEnter = (event) => {
             if (event.keyCode === 13) {
               const form = event.target.form;
@@ -107,3 +83,25 @@ export const FormQuestions = ({ questions }) => {
 //   .replace(/!+$/, "")
 //   .replace(/¡+/g, "")
 //   .replace(/,+/g, "");
+
+// let validationSchema = Yup.object().shape(
+//   questions.map((question) =>
+//     question.required
+//       ? (question.title = Yup.string().required())
+//       : (question.title = Yup.string())
+//   )
+// );
+
+// let validationSchema = Yup.object().shape({});
+// questions.forEach((field) => {
+//   if (field.required) {
+//     validationSchema[field.title] = Yup.string().required();
+//   } else {
+//     validationSchema[field.title] = Yup.string();
+//   }
+// });
+// const validationSchema = questions.map((question) => ({
+//   ...question,
+//   [question.title]: Yup.string().required,
+// }));
+// console.log(validationSchema);
