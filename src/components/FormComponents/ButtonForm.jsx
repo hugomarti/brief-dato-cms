@@ -9,6 +9,7 @@ export const ButtonForm = ({
   questionNumber,
   isSubmitting,
   nextRoute,
+  isDisabled,
 }) => {
   const history = useHistory();
   const lastQuestionMatch = lastQuestion === questionNumber;
@@ -26,6 +27,7 @@ export const ButtonForm = ({
         loadingText="Enviando..."
         onClick={() => !lastQuestionMatch && history.push(nextRoute)}
         autoFocus
+        isDisabled={isDisabled}
       >
         <Box mr="0.5rem">{lastQuestionMatch ? <FiSend /> : <CheckIcon />}</Box>
         {lastQuestionMatch ? "Enviar" : "Continuar"}

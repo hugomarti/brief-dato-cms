@@ -1,9 +1,20 @@
-import React from "react";
-import { Flex, Text, Center } from "@chakra-ui/react";
+import React, { useState } from "react";
+import {
+  Flex,
+  Text,
+  Center,
+  FormControl,
+  FormErrorMessage,
+} from "@chakra-ui/react";
 
 import { ButtonForm } from "../FormComponents/ButtonForm";
-import { FormFieldTest } from "../FormComponents/FormFieldTest";
 import { Footer } from "./Footer";
+import { Field } from "formik";
+import { TitleSubtitle } from "../FormComponents/TitleSubtitle";
+import { InputTextFormTest } from "../FormComponents/InputTextFormTest";
+import { RadioBoxForm } from "../FormComponents/RadioBoxForm";
+import { CheckboxForm } from "../FormComponents/CheckboxForm";
+import { AttachDocForm } from "../FormComponents/AttachDocForm";
 
 export const Question = ({
   question,
@@ -12,7 +23,29 @@ export const Question = ({
   isSubmitting,
   onKeyDown,
 }) => {
-  const { questionNumber, nextRoute } = question;
+  const {
+    questionNumber,
+    nextRoute,
+    title,
+    required,
+    subtitle,
+    inputText,
+    radioBox,
+    inputOptions,
+    checkbox,
+    attachDoc,
+  } = question;
+  const [isDisableButton, setIsDisableButton] = useState(true);
+
+  function validateName(value) {
+    let error;
+    if (!value) {
+      error = "This field is required";
+    } else {
+      setIsDisableButton(false);
+    }
+    return error;
+  }
   return (
     <Center ml="1rem" color="white" h="100vh" pos="relative">
       <Flex w={{ xl: "40%", lg: "40%", md: "50%", base: "90%" }}>
@@ -20,16 +53,46 @@ export const Question = ({
           {questionNumber}
         </Text>
         <Flex flexDir="column" alignItems="start">
-          <FormFieldTest
-            question={question}
-            handleChange={handleChange}
-            onKeyDown={onKeyDown}
-          />
+          <Field name={title} validate={validateName}>
+            {({ field, form }) => (
+              <FormControl
+                isRequired={required}
+                isInvalid={form.errors[title] && form.touched[title]}
+              >
+                <TitleSubtitle title={title} subtitle={subtitle} />
+                <FormErrorMessage>{form.errors[title]}</FormErrorMessage>
+                <InputTextFormTest
+                  field={field}
+                  inputText={inputText}
+                  onKeyDown={onKeyDown}
+                />
+                <RadioBoxForm
+                  radioBox={radioBox}
+                  inputOptions={inputOptions}
+                  field={field}
+                  onChange={handleChange}
+                  name={title}
+                />
+                <CheckboxForm
+                  checkbox={checkbox}
+                  inputOptions={inputOptions}
+                  onChange={handleChange}
+                  name={title}
+                />
+                <AttachDocForm
+                  attachDoc={attachDoc}
+                  onChange={handleChange}
+                  name={title}
+                />
+              </FormControl>
+            )}
+          </Field>
           <ButtonForm
             lastQuestion={lastQuestion.questionNumber}
             questionNumber={questionNumber}
             isSubmitting={isSubmitting}
             nextRoute={nextRoute}
+            isDisabled={required ? isDisableButton : false}
           />
         </Flex>
       </Flex>

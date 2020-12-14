@@ -16,6 +16,7 @@ export const InputTextFormTest = ({ inputText, onKeyDown, field }) => {
             variant="flushed"
             fontSize="1.2rem"
             focusBorderColor="red.300"
+            errorBorderColor="none"
           />
         </Flex>
       )}
