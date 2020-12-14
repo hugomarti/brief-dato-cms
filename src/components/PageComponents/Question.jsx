@@ -11,7 +11,7 @@ import { ButtonForm } from "../FormComponents/ButtonForm";
 import { Footer } from "./Footer";
 import { Field } from "formik";
 import { TitleSubtitle } from "../FormComponents/TitleSubtitle";
-import { InputTextFormTest } from "../FormComponents/InputTextFormTest";
+import { InputTextForm } from "../FormComponents/InputTextForm";
 import { RadioBoxForm } from "../FormComponents/RadioBoxForm";
 import { CheckboxForm } from "../FormComponents/CheckboxForm";
 import { AttachDocForm } from "../FormComponents/AttachDocForm";
@@ -39,7 +39,7 @@ export const Question = ({
 
   function validateName(value) {
     let error;
-    if (!value) {
+    if (!value && required) {
       error = "This field is required";
     } else {
       setIsDisableButton(false);
@@ -61,7 +61,7 @@ export const Question = ({
               >
                 <TitleSubtitle title={title} subtitle={subtitle} />
                 <FormErrorMessage>{form.errors[title]}</FormErrorMessage>
-                <InputTextFormTest
+                <InputTextForm
                   field={field}
                   inputText={inputText}
                   onKeyDown={onKeyDown}
@@ -81,8 +81,8 @@ export const Question = ({
                 />
                 <AttachDocForm
                   attachDoc={attachDoc}
-                  onChange={handleChange}
                   name={title}
+                  field={field}
                 />
               </FormControl>
             )}

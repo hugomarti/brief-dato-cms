@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Center, Input, Text } from "@chakra-ui/react";
 import { AiOutlineCloudUpload } from "react-icons/ai";
 
-export const AttachDocForm = ({ attachDoc, onChange, name }) => {
+export const AttachDocForm = ({ attachDoc, field, onChange, name }) => {
   return (
     <React.Fragment>
       {attachDoc && (
@@ -22,6 +22,7 @@ export const AttachDocForm = ({ attachDoc, onChange, name }) => {
           </Center>
 
           <Input
+            {...field}
             autoFocus
             size="lg"
             mt="1rem"
@@ -29,8 +30,8 @@ export const AttachDocForm = ({ attachDoc, onChange, name }) => {
             fontSize="1.2rem"
             focusBorderColor="red.300"
             errorBorderColor="none"
-            onChange={onChange}
-            name={name}
+            // onChange={onChange}
+            // name={name}
             // onKeyPress={data.number === "1" ? null : onKeyPress}
             // name="5_6_Enviar documento_Link"
           />

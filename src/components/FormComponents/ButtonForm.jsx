@@ -26,7 +26,7 @@ export const ButtonForm = ({
         isLoading={lastQuestionMatch ? isSubmitting : false}
         loadingText="Enviando..."
         onClick={() => !lastQuestionMatch && history.push(nextRoute)}
-        autoFocus
+        // autoFocus
         isDisabled={isDisabled}
       >
         <Box mr="0.5rem">{lastQuestionMatch ? <FiSend /> : <CheckIcon />}</Box>
