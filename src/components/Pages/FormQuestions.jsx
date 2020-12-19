@@ -29,6 +29,7 @@ export const FormQuestions = ({ questions }) => {
       <Route exact path="/">
         <HeroBrief />
       </Route>
+
       <Formik
         initialValues={initialFormValues}
         onSubmit={(values, { setSubmitting }) => {
@@ -39,19 +40,23 @@ export const FormQuestions = ({ questions }) => {
           }, 400);
         }}
       >
-        {({ handleChange, handleSubmit, isSubmitting }) => {
-          const handleEnter = (event) => {
-            if (event.keyCode === 13) {
-              const form = event.target.form;
-              const index = Array.prototype.indexOf.call(form, event.target);
-              form.elements[index + 1].focus();
-              event.preventDefault();
-            }
-          };
+        {({ handleChange, handleSubmit, isSubmitting, values }) => {
           return (
             <Flex flexDir="column" bg="gray.800">
               <Form onSubmit={handleSubmit}>
                 {updatedData.map((question) => {
+                  const handleEnter = (event) => {
+                    if (event.keyCode === 13) {
+                      const form = event.target.form;
+                      const index = Array.prototype.indexOf.call(
+                        form,
+                        event.target
+                      );
+                      form.elements[index + 1].focus();
+                      event.preventDefault();
+                    }
+                  };
+
                   return (
                     <Route key={question.id} path={question.route}>
                       <Question
@@ -60,6 +65,7 @@ export const FormQuestions = ({ questions }) => {
                         handleChange={handleChange}
                         isSubmitting={isSubmitting}
                         onKeyDown={handleEnter}
+                        values={values}
                       />
                     </Route>
                   );

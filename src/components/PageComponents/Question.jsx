@@ -9,7 +9,7 @@ import {
 
 import { ButtonForm } from "../FormComponents/ButtonForm";
 import { Footer } from "./Footer";
-import { Field } from "formik";
+import { Field, useField } from "formik";
 import { TitleSubtitle } from "../FormComponents/TitleSubtitle";
 import { InputTextForm } from "../FormComponents/InputTextForm";
 import { RadioBoxForm } from "../FormComponents/RadioBoxForm";
@@ -22,6 +22,7 @@ export const Question = ({
   handleChange,
   isSubmitting,
   onKeyDown,
+  values,
 }) => {
   const {
     questionNumber,
@@ -34,8 +35,10 @@ export const Question = ({
     inputOptions,
     checkbox,
     attachDoc,
+    titleSection,
   } = question;
   const [isDisableButton, setIsDisableButton] = useState(true);
+  const [value] = useField(question.title);
 
   function validateName(value) {
     let error;
@@ -46,6 +49,7 @@ export const Question = ({
     }
     return error;
   }
+
   return (
     <Center ml="1rem" color="white" h="100vh" pos="relative">
       <Flex w={{ xl: "40%", lg: "40%", md: "50%", base: "90%" }}>
@@ -54,38 +58,40 @@ export const Question = ({
         </Text>
         <Flex flexDir="column" alignItems="start">
           <Field name={title} validate={validateName}>
-            {({ field, form }) => (
-              <FormControl
-                isRequired={required}
-                isInvalid={form.errors[title] && form.touched[title]}
-              >
-                <TitleSubtitle title={title} subtitle={subtitle} />
-                <FormErrorMessage>{form.errors[title]}</FormErrorMessage>
-                <InputTextForm
-                  field={field}
-                  inputText={inputText}
-                  onKeyDown={onKeyDown}
-                />
-                <RadioBoxForm
-                  radioBox={radioBox}
-                  inputOptions={inputOptions}
-                  field={field}
-                  onChange={handleChange}
-                  name={title}
-                />
-                <CheckboxForm
-                  checkbox={checkbox}
-                  inputOptions={inputOptions}
-                  onChange={handleChange}
-                  name={title}
-                />
-                <AttachDocForm
-                  attachDoc={attachDoc}
-                  name={title}
-                  field={field}
-                />
-              </FormControl>
-            )}
+            {({ field, form }) => {
+              return (
+                <FormControl
+                  isRequired={required}
+                  isInvalid={form.errors[title] && form.touched[title]}
+                >
+                  <TitleSubtitle title={title} subtitle={subtitle} />
+                  <FormErrorMessage>{form.errors[title]}</FormErrorMessage>
+                  <InputTextForm
+                    field={field}
+                    inputText={inputText}
+                    onKeyDown={onKeyDown}
+                  />
+                  <RadioBoxForm
+                    radioBox={radioBox}
+                    inputOptions={inputOptions}
+                    field={field}
+                    onChange={handleChange}
+                    name={title}
+                  />
+                  <CheckboxForm
+                    checkbox={checkbox}
+                    inputOptions={inputOptions}
+                    onChange={handleChange}
+                    name={title}
+                  />
+                  <AttachDocForm
+                    attachDoc={attachDoc}
+                    name={title}
+                    field={field}
+                  />
+                </FormControl>
+              );
+            }}
           </Field>
           <ButtonForm
             lastQuestion={lastQuestion.questionNumber}
@@ -93,6 +99,9 @@ export const Question = ({
             isSubmitting={isSubmitting}
             nextRoute={nextRoute}
             isDisabled={required ? isDisableButton : false}
+            titleSection={titleSection}
+            showInput={value.value}
+            hidden={value.value}
           />
         </Flex>
       </Flex>
