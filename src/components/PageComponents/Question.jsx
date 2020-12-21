@@ -22,7 +22,6 @@ export const Question = ({
   handleChange,
   isSubmitting,
   onKeyDown,
-  values,
 }) => {
   const {
     questionNumber,
@@ -35,7 +34,6 @@ export const Question = ({
     inputOptions,
     checkbox,
     attachDoc,
-    titleSection,
   } = question;
   const [isDisableButton, setIsDisableButton] = useState(true);
   const [value] = useField(question.title);
@@ -53,7 +51,7 @@ export const Question = ({
   return (
     <Center ml="1rem" color="white" h="100vh" pos="relative">
       <Flex w={{ xl: "40%", lg: "40%", md: "50%", base: "90%" }}>
-        <Text fontSize="1.5rem" mr="2rem">
+        <Text fontSize="1.5rem" mr="2rem" mt="0.6rem">
           {questionNumber}
         </Text>
         <Flex flexDir="column" alignItems="start">
@@ -99,7 +97,7 @@ export const Question = ({
             isSubmitting={isSubmitting}
             nextRoute={nextRoute}
             isDisabled={required ? isDisableButton : false}
-            titleSection={titleSection}
+            question={question}
             showInput={value.value}
             hidden={value.value}
           />

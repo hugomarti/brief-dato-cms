@@ -5,7 +5,7 @@ export const InputTextForm = ({ inputText, onKeyDown, field }) => {
   return (
     <React.Fragment>
       {inputText && (
-        <Flex w="40rem" mt="1rem">
+        <Flex w="100%" mt="1rem">
           <Input
             {...field}
             placeholder="Escribe aqui tu respuesta..."

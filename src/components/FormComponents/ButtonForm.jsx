@@ -11,9 +11,10 @@ export const ButtonForm = ({
   isSubmitting,
   nextRoute,
   isDisabled,
-  titleSection,
+  question,
   hidden,
 }) => {
+  const { titleSection, radioBox, checkbox, inputText } = question;
   const history = useHistory();
   const lastQuestionMatch = lastQuestion === questionNumber;
 
@@ -33,37 +34,54 @@ export const ButtonForm = ({
       return "pointer";
     }
   };
+
+  const handleNext = () => {
+    if (titleSection === true) {
+      return true;
+    }
+    if (radioBox === true) {
+      return true;
+    }
+    if (checkbox === true) {
+      return true;
+    }
+    if (inputText === true) {
+      return false;
+    }
+  };
   return (
-    <Flex
-      align="center"
-      mt="2rem"
-      opacity={titleSection ? 100 : handleHiddenBlock}
-    >
-      <Button
-        bgColor="rgb(226, 90, 90)"
-        _hover={{ bgColor: "rgb(197, 100, 100)" }}
-        color="black"
-        fontWeight="200"
-        size="sm"
-        type={lastQuestionMatch ? "submit" : "button"}
-        isLoading={lastQuestionMatch ? isSubmitting : false}
-        loadingText="Enviando..."
-        onClick={() => !lastQuestionMatch && history.push(nextRoute)}
-        autoFocus={titleSection ? true : false}
-        isDisabled={isDisabled}
-        cursor={titleSection ? "default" : hableCursor}
+    <Flex align="center" mt="2rem">
+      <Flex alignItems="center">
+        <Text>Pulsa enter</Text>
+        <AiOutlineEnter />
+      </Flex>
+      <Box
+        opacity={
+          question.titleSection || lastQuestionMatch ? 100 : handleHiddenBlock
+        }
+        ml="1rem"
+        mr="0.5rem"
       >
-        <Box mr="0.5rem">{lastQuestionMatch ? <FiSend /> : <CheckIcon />}</Box>
-        {lastQuestionMatch ? "Enviar" : "Continuar"}
-      </Button>
-      {!isDisabled && (
-        <Flex alignItems="center">
-          <Text ml="1rem" mr="0.5rem">
-            O pulsa enter
-          </Text>
-          <AiOutlineEnter />
-        </Flex>
-      )}
+        <Button
+          bgColor="rgb(226, 90, 90)"
+          _hover={{ bgColor: "rgb(197, 100, 100)" }}
+          color="black"
+          fontWeight="200"
+          size="sm"
+          type={lastQuestionMatch ? "submit" : "button"}
+          isLoading={lastQuestionMatch ? isSubmitting : false}
+          loadingText="Enviando..."
+          onClick={() => !lastQuestionMatch && history.push(nextRoute)}
+          autoFocus={handleNext}
+          isDisabled={isDisabled}
+          cursor={titleSection ? "default" : hableCursor}
+        >
+          <Box mr="0.5rem">
+            {lastQuestionMatch ? <FiSend /> : <CheckIcon />}
+          </Box>
+          {lastQuestionMatch ? "Enviar" : "Continuar"}
+        </Button>
+      </Box>
     </Flex>
   );
 };

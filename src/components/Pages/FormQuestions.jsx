@@ -40,7 +40,7 @@ export const FormQuestions = ({ questions }) => {
           }, 400);
         }}
       >
-        {({ handleChange, handleSubmit, isSubmitting, values }) => {
+        {({ handleChange, handleSubmit, isSubmitting }) => {
           return (
             <Flex flexDir="column" bg="gray.800">
               <Form onSubmit={handleSubmit}>
@@ -65,7 +65,6 @@ export const FormQuestions = ({ questions }) => {
                         handleChange={handleChange}
                         isSubmitting={isSubmitting}
                         onKeyDown={handleEnter}
-                        values={values}
                       />
                     </Route>
                   );
@@ -81,33 +80,3 @@ export const FormQuestions = ({ questions }) => {
     </React.Fragment>
   );
 };
-// const titleToUrl = question.title
-//   .replace(/\s+/g, "-")
-//   .toLowerCase()
-//   .normalize("NFD")
-//   .replace(/[\u0300-\u036f]/g, "")
-//   .replace(/!+$/, "")
-//   .replace(/¡+/g, "")
-//   .replace(/,+/g, "");
-
-// let validationSchema = Yup.object().shape(
-//   questions.map((question) =>
-//     question.required
-//       ? (question.title = Yup.string().required())
-//       : (question.title = Yup.string())
-//   )
-// );
-
-// let validationSchema = Yup.object().shape({});
-// questions.forEach((field) => {
-//   if (field.required) {
-//     validationSchema[field.title] = Yup.string().required();
-//   } else {
-//     validationSchema[field.title] = Yup.string();
-//   }
-// });
-// const validationSchema = questions.map((question) => ({
-//   ...question,
-//   [question.title]: Yup.string().required,
-// }));
-// console.log(validationSchema);

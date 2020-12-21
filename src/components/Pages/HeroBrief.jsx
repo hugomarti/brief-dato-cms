@@ -3,6 +3,7 @@ import { Button, Flex, Image, Text, Center } from "@chakra-ui/react";
 
 import DigitalLogo from "../../assets/digital-logo.png";
 import { useHistory } from "react-router-dom";
+import { AiOutlineEnter } from "react-icons/ai";
 
 export const HeroBrief = () => {
   const history = useHistory();
@@ -34,9 +35,19 @@ export const HeroBrief = () => {
           size="sm"
           fontWeight="200"
           onClick={() => history.push("/pregunta-1")}
+          onKeyPress={(event) => {
+            if (event.key === "enter") {
+              history.push("/pregunta-1");
+            }
+          }}
+          autoFocus
         >
           Comenzar
         </Button>
+        <Flex alignItems="center" color="white" ml="1rem">
+          <Text>O pulsa enter</Text>
+          <AiOutlineEnter />
+        </Flex>
       </Flex>
     </Center>
   );
