@@ -19,7 +19,7 @@ export const ButtonForm = ({
   const lastQuestionMatch = lastQuestion === questionNumber;
 
   const handleHiddenBlock = () => {
-    if (hidden === "") {
+    if (hidden === "" || hidden.length === 0) {
       return 0;
     }
     if (hidden.length > 1) {
@@ -35,7 +35,7 @@ export const ButtonForm = ({
     }
   };
 
-  const handleNext = () => {
+  const handleFocus = () => {
     if (titleSection === true) {
       return true;
     }
@@ -47,12 +47,14 @@ export const ButtonForm = ({
     }
     if (inputText === true) {
       return false;
+    } else {
+      return false;
     }
   };
   return (
     <Flex align="center" mt="2rem">
       <Flex alignItems="center">
-        <Text>Pulsa enter</Text>
+        <Text mr="0.5rem">Pulsa enter</Text>
         <AiOutlineEnter />
       </Flex>
       <Box
@@ -72,7 +74,7 @@ export const ButtonForm = ({
           isLoading={lastQuestionMatch ? isSubmitting : false}
           loadingText="Enviando..."
           onClick={() => !lastQuestionMatch && history.push(nextRoute)}
-          autoFocus={handleNext}
+          autoFocus={handleFocus()}
           isDisabled={isDisabled}
           cursor={titleSection ? "default" : hableCursor}
         >

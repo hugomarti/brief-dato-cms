@@ -38,7 +38,7 @@ export const Question = ({
   const [isDisableButton, setIsDisableButton] = useState(true);
   const [value] = useField(question.title);
 
-  function validateName(value) {
+  function handleValidation(value) {
     let error;
     if (!value && required) {
       error = "This field is required";
@@ -55,7 +55,7 @@ export const Question = ({
           {questionNumber}
         </Text>
         <Flex flexDir="column" alignItems="start">
-          <Field name={title} validate={validateName}>
+          <Field name={title} validate={handleValidation}>
             {({ field, form }) => {
               return (
                 <FormControl
@@ -75,12 +75,14 @@ export const Question = ({
                     field={field}
                     onChange={handleChange}
                     name={title}
+                    // onKeyDown={onKeyDown}
                   />
                   <CheckboxForm
                     checkbox={checkbox}
                     inputOptions={inputOptions}
                     onChange={handleChange}
                     name={title}
+                    onKeyDown={onKeyDown}
                   />
                   <AttachDocForm
                     attachDoc={attachDoc}

@@ -1,7 +1,13 @@
 import React, { useState } from "react";
 import { Box, Checkbox, Input, SlideFade, Stack } from "@chakra-ui/react";
 
-export const CheckboxForm = ({ inputOptions, checkbox, onChange, name }) => {
+export const CheckboxForm = ({
+  inputOptions,
+  checkbox,
+  onChange,
+  name,
+  onKeyDown,
+}) => {
   const [showInput, setShowInput] = useState(false);
 
   const handleChange = (e) => {
@@ -48,6 +54,7 @@ export const CheckboxForm = ({ inputOptions, checkbox, onChange, name }) => {
                 variant="flushed"
                 fontSize="1.2rem"
                 focusBorderColor="red.300"
+                onKeyDown={onKeyDown}
               />
             </SlideFade>
           )}
