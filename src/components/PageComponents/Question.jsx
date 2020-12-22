@@ -9,7 +9,7 @@ import {
 
 import { ButtonForm } from "../FormComponents/ButtonForm";
 import { Footer } from "./Footer";
-import { Field, useField } from "formik";
+import { FastField, useField } from "formik";
 import { TitleSubtitle } from "../FormComponents/TitleSubtitle";
 import { InputTextForm } from "../FormComponents/InputTextForm";
 import { RadioBoxForm } from "../FormComponents/RadioBoxForm";
@@ -38,9 +38,9 @@ export const Question = ({
   const [isDisableButton, setIsDisableButton] = useState(true);
   const [value] = useField(question.title);
 
-  function handleValidation(value) {
+  function handleValidation(e) {
     let error;
-    if (!value && required) {
+    if (!e.target.value && required) {
       error = "This field is required";
     } else {
       setIsDisableButton(false);
@@ -55,7 +55,7 @@ export const Question = ({
           {questionNumber}
         </Text>
         <Flex flexDir="column" alignItems="start">
-          <Field name={title} validate={handleValidation}>
+          <FastField name={title}>
             {({ field, form }) => {
               return (
                 <FormControl
@@ -65,22 +65,30 @@ export const Question = ({
                   <TitleSubtitle title={title} subtitle={subtitle} />
                   <FormErrorMessage>{form.errors[title]}</FormErrorMessage>
                   <InputTextForm
-                    field={field}
+                    name={title}
+                    handleChange={(e) => {
+                      handleChange(e);
+                      handleValidation(e);
+                    }}
                     inputText={inputText}
                     onKeyDown={onKeyDown}
                   />
                   <RadioBoxForm
                     radioBox={radioBox}
                     inputOptions={inputOptions}
-                    field={field}
-                    onChange={handleChange}
+                    onChange={(e) => {
+                      handleChange(e);
+                      handleValidation(e);
+                    }}
                     name={title}
-                    // onKeyDown={onKeyDown}
                   />
                   <CheckboxForm
                     checkbox={checkbox}
                     inputOptions={inputOptions}
-                    onChange={handleChange}
+                    onChange={(e) => {
+                      handleChange(e);
+                      handleValidation(e);
+                    }}
                     name={title}
                     onKeyDown={onKeyDown}
                   />
@@ -92,7 +100,7 @@ export const Question = ({
                 </FormControl>
               );
             }}
-          </Field>
+          </FastField>
           <ButtonForm
             lastQuestion={lastQuestion.questionNumber}
             questionNumber={questionNumber}

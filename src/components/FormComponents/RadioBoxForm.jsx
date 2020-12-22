@@ -8,7 +8,13 @@ import {
   Stack,
 } from "@chakra-ui/react";
 
-export const RadioBoxForm = ({ inputOptions, radioBox, onChange, name }) => {
+export const RadioBoxForm = ({
+  inputOptions,
+  radioBox,
+  onChange,
+  name,
+  onKeyDown,
+}) => {
   const [showInput, setShowInput] = useState(false);
 
   const handleChange = (e) => {
