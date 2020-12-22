@@ -8,7 +8,7 @@ import { AiOutlineEnter } from "react-icons/ai";
 export const HeroBrief = () => {
   const history = useHistory();
   return (
-    <Center h="100vh" bg="#1a202c" flexDir="column">
+    <Center h="100vh" bg="#151515" flexDir="column">
       <Image src={DigitalLogo} />
       <Text
         fontWeight="600"

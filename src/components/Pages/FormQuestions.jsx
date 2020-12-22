@@ -34,15 +34,16 @@ export const FormQuestions = ({ questions }) => {
         initialValues={initialFormValues}
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
-            console.log(JSON.stringify(values, null, 2));
+            // console.log(JSON.stringify(values, null, 2));
+            console.log(values);
             setSubmitting(false);
             history.push("/completado");
           }, 400);
         }}
       >
-        {({ handleChange, handleSubmit, isSubmitting }) => {
+        {({ handleChange, handleSubmit, isSubmitting, setFieldValue }) => {
           return (
-            <Flex flexDir="column" bg="gray.800">
+            <Flex flexDir="column" bg="#151515">
               <Form onSubmit={handleSubmit}>
                 {updatedData.map((question) => {
                   const handleEnter = (event) => {
@@ -65,6 +66,9 @@ export const FormQuestions = ({ questions }) => {
                         handleChange={handleChange}
                         isSubmitting={isSubmitting}
                         onKeyDown={handleEnter}
+                        setFieldValue={(event) =>
+                          setFieldValue(question.title, event.target.files[0])
+                        }
                       />
                     </Route>
                   );

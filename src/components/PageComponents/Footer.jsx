@@ -3,7 +3,7 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 
 export const Footer = ({ questionNumber }) => {
-  const [isLargerThan1280] = useMediaQuery("(min-width: 767px)");
+  const [isLargerThan767] = useMediaQuery("(min-width: 767px)");
   const history = useHistory();
   return (
     <Flex
@@ -24,7 +24,7 @@ export const Footer = ({ questionNumber }) => {
       >
         Atras
       </Button>
-      <Flex ml="2rem" w={isLargerThan1280 ? "50%" : "100%"} alignItems="center">
+      <Flex ml="2rem" w={isLargerThan767 ? "50%" : "100%"} alignItems="center">
         <Text fontSize="sm" mr="1rem">
           {questionNumber} de 30 respondidas
         </Text>

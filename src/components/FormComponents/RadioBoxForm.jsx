@@ -6,6 +6,7 @@ import {
   RadioGroup,
   SlideFade,
   Stack,
+  useMediaQuery,
 } from "@chakra-ui/react";
 
 export const RadioBoxForm = ({
@@ -16,6 +17,7 @@ export const RadioBoxForm = ({
   onKeyDown,
 }) => {
   const [showInput, setShowInput] = useState(false);
+  const [isLargerThan767] = useMediaQuery("(min-width: 767px)");
 
   const handleChange = (e) => {
     onChange(e);
@@ -39,7 +41,7 @@ export const RadioBoxForm = ({
                 px="1rem"
                 mt="1rem"
                 border="1px solid white"
-                w="40vw"
+                w={isLargerThan767 ? "40vw" : "100%"}
                 onKeyDown={onKeyDown}
               >
                 <Radio
@@ -49,7 +51,11 @@ export const RadioBoxForm = ({
                   onChange={handleChange}
                   value={option.option}
                 >
-                  <Box w="38vw" cursor="pointer" zIndex="1">
+                  <Box
+                    w={isLargerThan767 ? "33vw" : "63vw"}
+                    cursor="pointer"
+                    zIndex="1"
+                  >
                     {option.option}
                   </Box>
                 </Radio>

@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { Box, Checkbox, Input, SlideFade, Stack } from "@chakra-ui/react";
+import {
+  Box,
+  Checkbox,
+  Input,
+  SlideFade,
+  Stack,
+  useMediaQuery,
+} from "@chakra-ui/react";
 
 export const CheckboxForm = ({
   inputOptions,
@@ -9,6 +16,7 @@ export const CheckboxForm = ({
   onKeyDown,
 }) => {
   const [showInput, setShowInput] = useState(false);
+  const [isLargerThan767] = useMediaQuery("(min-width: 767px)");
 
   const handleChange = (e) => {
     if (e.target.value === "Otro") {
@@ -29,7 +37,7 @@ export const CheckboxForm = ({
               px="1rem"
               mt="1rem"
               border="1px solid white"
-              w="40vw"
+              w={isLargerThan767 ? "40vw" : "100%"}
               onKeyDown={onKeyDown}
             >
               <Checkbox

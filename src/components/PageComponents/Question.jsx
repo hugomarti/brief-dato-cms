@@ -98,6 +98,7 @@ export const Question = ({
                     attachDoc={attachDoc}
                     onChange={handleChange}
                     name={title}
+                    setFieldValue={setFieldValue}
                   />
                 </FormControl>
               );

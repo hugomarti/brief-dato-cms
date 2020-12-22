@@ -16,7 +16,9 @@ code {
     monospace;
 }
 html {
-  background-color: #1a202c;
+  background-color: #151515;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
 }
 button:focus {
   outline: none !important;

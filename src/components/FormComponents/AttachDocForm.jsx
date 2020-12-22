@@ -1,24 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, Button, Center, Input, Text } from "@chakra-ui/react";
 import { AiOutlineCloudUpload } from "react-icons/ai";
 
 export const AttachDocForm = ({ attachDoc, onChange, name, setFieldValue }) => {
-  // const handleChange = (e) => {
-  //   if (e.target.files[0].size > 10000000) {
-  //     alert("El archivo no puede superar los 10mb");
-  //   } else {
-  //     onChange(e);
-  //     setFieldValue(e);
-  //   }
-  // };
+  const [fileName, setFileName] = useState("");
+  const handleChange = (e) => {
+    if (e.target.files[0].size > 10000000) {
+      alert("El archivo no puede superar los 10mb");
+    } else {
+      onChange(e);
+      setFieldValue(e);
+      setFileName(e.target.files[0].name);
+    }
+  };
+
   return (
     <React.Fragment>
       {attachDoc && (
         <Box>
           <Center
             flexDir="column"
-            bg="gray.600"
-            _hover={{ bg: "gray.700" }}
+            bg="#2c2c2c"
+            _hover={{ bg: "#303030" }}
             rounded="md"
             border="1px dashed white"
             p="3rem"
@@ -42,10 +45,11 @@ export const AttachDocForm = ({ attachDoc, onChange, name, setFieldValue }) => {
                 style={{ opacity: 0, width: "5px" }}
                 type="file"
                 name={name}
-                onChange={onChange}
+                onChange={handleChange}
               />
               Elige Archivo
             </Button>
+            <Text>{fileName}</Text>
           </Center>
 
           <Input

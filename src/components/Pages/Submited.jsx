@@ -5,7 +5,7 @@ import DigitalLogo from "../../assets/digital-logo.png";
 
 export const SubmitedPage = () => {
   return (
-    <Center h="100vh" bg="#1a202c" flexDir="column" color="white">
+    <Center h="100vh" bg="#151515" flexDir="column" color="white">
       <Image src={DigitalLogo} />
       <Text fontWeight="600" fontSize="2rem" letterSpacing="1px">
         ¡Gracias por aplicar!
