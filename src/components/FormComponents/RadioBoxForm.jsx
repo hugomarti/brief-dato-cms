@@ -40,6 +40,7 @@ export const RadioBoxForm = ({
                 mt="1rem"
                 border="1px solid white"
                 w="40vw"
+                onKeyDown={onKeyDown}
               >
                 <Radio
                   w="100%"

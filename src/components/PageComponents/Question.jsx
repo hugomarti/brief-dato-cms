@@ -1,15 +1,9 @@
 import React, { useState } from "react";
-import {
-  Flex,
-  Text,
-  Center,
-  FormControl,
-  FormErrorMessage,
-} from "@chakra-ui/react";
-
-import { ButtonForm } from "../FormComponents/ButtonForm";
-import { Footer } from "./Footer";
 import { FastField, useField } from "formik";
+import { Flex, Text, Center, FormControl } from "@chakra-ui/react";
+
+import { Footer } from "./Footer";
+import { ButtonForm } from "../FormComponents/ButtonForm";
 import { TitleSubtitle } from "../FormComponents/TitleSubtitle";
 import { InputTextForm } from "../FormComponents/InputTextForm";
 import { RadioBoxForm } from "../FormComponents/RadioBoxForm";
@@ -22,6 +16,7 @@ export const Question = ({
   handleChange,
   isSubmitting,
   onKeyDown,
+  setFieldValue,
 }) => {
   const {
     questionNumber,
@@ -35,72 +30,80 @@ export const Question = ({
     checkbox,
     attachDoc,
   } = question;
+
   const [isDisableButton, setIsDisableButton] = useState(true);
+  const [requiredMessage, setRequiredMessage] = useState("");
   const [value] = useField(question.title);
 
   function handleValidation(e) {
-    let error;
     if (!e.target.value && required) {
-      error = "This field is required";
+      setRequiredMessage("Este campo es obligatorio");
     } else {
+      setRequiredMessage("");
       setIsDisableButton(false);
     }
-    return error;
   }
 
   return (
-    <Center ml="1rem" color="white" h="100vh" pos="relative">
-      <Flex w={{ xl: "40%", lg: "40%", md: "50%", base: "90%" }}>
+    <Center mx="1rem" color="white" h="100vh" pos="relative">
+      <Flex w={{ xl: "50%", lg: "50%", md: "50%", base: "90%" }}>
         <Text fontSize="1.5rem" mr="2rem" mt="0.6rem">
           {questionNumber}
         </Text>
+
         <Flex flexDir="column" alignItems="start">
           <FastField name={title}>
-            {({ field, form }) => {
+            {() => {
               return (
-                <FormControl
-                  isRequired={required}
-                  isInvalid={form.errors[title] && form.touched[title]}
-                >
-                  <TitleSubtitle title={title} subtitle={subtitle} />
-                  <FormErrorMessage>{form.errors[title]}</FormErrorMessage>
+                <FormControl isRequired={required}>
+                  <TitleSubtitle
+                    title={title}
+                    subtitle={subtitle}
+                    errorMessage={requiredMessage}
+                  />
+
                   <InputTextForm
                     name={title}
+                    inputText={inputText}
+                    onKeyDown={onKeyDown}
                     handleChange={(e) => {
                       handleChange(e);
                       handleValidation(e);
                     }}
-                    inputText={inputText}
-                    onKeyDown={onKeyDown}
                   />
+
                   <RadioBoxForm
                     radioBox={radioBox}
                     inputOptions={inputOptions}
+                    name={title}
+                    onKeyDown={onKeyDown}
                     onChange={(e) => {
                       handleChange(e);
                       handleValidation(e);
                     }}
-                    name={title}
                   />
+
                   <CheckboxForm
                     checkbox={checkbox}
                     inputOptions={inputOptions}
+                    name={title}
+                    onKeyDown={onKeyDown}
                     onChange={(e) => {
                       handleChange(e);
                       handleValidation(e);
                     }}
-                    name={title}
-                    onKeyDown={onKeyDown}
                   />
+
                   <AttachDocForm
                     attachDoc={attachDoc}
+                    onChange={handleChange}
                     name={title}
-                    field={field}
                   />
                 </FormControl>
               );
             }}
           </FastField>
+
           <ButtonForm
             lastQuestion={lastQuestion.questionNumber}
             questionNumber={questionNumber}

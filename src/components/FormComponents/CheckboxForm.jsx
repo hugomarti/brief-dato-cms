@@ -30,6 +30,7 @@ export const CheckboxForm = ({
               mt="1rem"
               border="1px solid white"
               w="40vw"
+              onKeyDown={onKeyDown}
             >
               <Checkbox
                 w="100%"

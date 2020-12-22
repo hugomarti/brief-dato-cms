@@ -1,8 +1,16 @@
 import React from "react";
-import { Box, Center, Input, Text } from "@chakra-ui/react";
+import { Box, Button, Center, Input, Text } from "@chakra-ui/react";
 import { AiOutlineCloudUpload } from "react-icons/ai";
 
-export const AttachDocForm = ({ attachDoc, field, onChange, name }) => {
+export const AttachDocForm = ({ attachDoc, onChange, name, setFieldValue }) => {
+  // const handleChange = (e) => {
+  //   if (e.target.files[0].size > 10000000) {
+  //     alert("El archivo no puede superar los 10mb");
+  //   } else {
+  //     onChange(e);
+  //     setFieldValue(e);
+  //   }
+  // };
   return (
     <React.Fragment>
       {attachDoc && (
@@ -10,7 +18,7 @@ export const AttachDocForm = ({ attachDoc, field, onChange, name }) => {
           <Center
             flexDir="column"
             bg="gray.600"
-            _hover={{ bg: "#303030" }}
+            _hover={{ bg: "gray.700" }}
             rounded="md"
             border="1px dashed white"
             p="3rem"
@@ -19,10 +27,28 @@ export const AttachDocForm = ({ attachDoc, field, onChange, name }) => {
           >
             <AiOutlineCloudUpload size="3rem" color="white" />
             <Text color="#dad8d8">Elige un archivo o arrastra aqui</Text>
+            <Button
+              my="1rem"
+              _hover={{
+                bgColor: "rgb(226, 90, 90)",
+                color: "#161616",
+              }}
+              size="sm"
+              variant="outline"
+              color="rgb(226, 90, 90)"
+              borderColor="rgb(226, 90, 90)"
+            >
+              <input
+                style={{ opacity: 0, width: "5px" }}
+                type="file"
+                name={name}
+                onChange={onChange}
+              />
+              Elige Archivo
+            </Button>
           </Center>
 
           <Input
-            {...field}
             autoFocus
             size="lg"
             mt="1rem"
@@ -30,10 +56,8 @@ export const AttachDocForm = ({ attachDoc, field, onChange, name }) => {
             fontSize="1.2rem"
             focusBorderColor="red.300"
             errorBorderColor="none"
-            // onChange={onChange}
-            // name={name}
-            // onKeyPress={data.number === "1" ? null : onKeyPress}
-            // name="5_6_Enviar documento_Link"
+            onChange={onChange}
+            name="Enviar documento_Link"
           />
         </Box>
       )}

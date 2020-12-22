@@ -1,16 +1,18 @@
-import { Button, Flex, Progress, Text } from "@chakra-ui/react";
+import { Button, Flex, Progress, Text, useMediaQuery } from "@chakra-ui/react";
 import React from "react";
 import { useHistory } from "react-router-dom";
 
 export const Footer = ({ questionNumber }) => {
+  const [isLargerThan1280] = useMediaQuery("(min-width: 767px)");
   const history = useHistory();
   return (
     <Flex
+      justifyContent="space-between"
+      alignItems="center"
       pos="absolute"
       bottom="0"
       p="1rem"
       w="100%"
-      justifyContent="space-between"
     >
       <Button
         size="sm"
@@ -22,8 +24,10 @@ export const Footer = ({ questionNumber }) => {
       >
         Atras
       </Button>
-      <Flex w="50%" alignItems="center">
-        <Text>{questionNumber} de 30 respondidas</Text>
+      <Flex ml="2rem" w={isLargerThan1280 ? "50%" : "100%"} alignItems="center">
+        <Text fontSize="sm" mr="1rem">
+          {questionNumber} de 30 respondidas
+        </Text>
         <Progress
           mt="0.5rem"
           colorScheme="red"

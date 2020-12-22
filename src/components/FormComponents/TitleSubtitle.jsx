@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, FormLabel, Text } from "@chakra-ui/react";
 
-export const TitleSubtitle = ({ title, subtitle }) => {
+export const TitleSubtitle = ({ title, subtitle, errorMessage }) => {
   return (
     <Box>
       <FormLabel
@@ -16,6 +16,7 @@ export const TitleSubtitle = ({ title, subtitle }) => {
       <Text color="#cac8c8" fontWeight="200">
         {subtitle}
       </Text>
+      {errorMessage && <Text color="rgb(226, 90, 90)">{errorMessage}</Text>}
     </Box>
   );
 };
