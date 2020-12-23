@@ -25,7 +25,7 @@ export const Footer = ({ questionNumber }) => {
         Atras
       </Button>
       <Flex ml="2rem" w={isLargerThan767 ? "50%" : "100%"} alignItems="center">
-        <Text fontSize="sm" mr="1rem">
+        <Text fontSize="1rem" mr="1rem">
           {questionNumber} de 30 respondidas
         </Text>
         <Progress

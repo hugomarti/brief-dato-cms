@@ -20,6 +20,7 @@ export const FormQuestions = ({ questions }) => {
     route: "/pregunta-" + (index + 1),
     nextRoute: "/pregunta-" + (index + 2),
     questionNumber: index + 1,
+    // fieldName: index + 1 + "_" + question.title,
   }));
 
   const lastQuestion = updatedData.slice(-1)[0];

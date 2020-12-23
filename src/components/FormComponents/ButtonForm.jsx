@@ -52,7 +52,7 @@ export const ButtonForm = ({
     }
   };
   return (
-    <Flex align="center" mt="2rem">
+    <Flex align="center" mt="1.5rem">
       <Flex alignItems="center">
         <Text mr="0.5rem">Pulsa enter</Text>
         <AiOutlineEnter />

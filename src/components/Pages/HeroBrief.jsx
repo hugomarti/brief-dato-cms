@@ -4,51 +4,61 @@ import { Button, Flex, Image, Text, Center } from "@chakra-ui/react";
 import DigitalLogo from "../../assets/digital-logo.png";
 import { useHistory } from "react-router-dom";
 import { AiOutlineEnter } from "react-icons/ai";
+import { motion } from "framer-motion";
+
+const MotionBox = motion.custom(Center);
 
 export const HeroBrief = () => {
   const history = useHistory();
   return (
     <Center h="100vh" bg="#151515" flexDir="column">
-      <Image src={DigitalLogo} />
-      <Text
-        fontWeight="600"
-        letterSpacing="1px"
-        fontSize="1.5rem"
-        color="white"
+      <MotionBox
+        animate={{ opacity: 1 }}
+        initial={{ opacity: 0.1 }}
+        transition={{ duration: 1 }}
+        flexDir="column"
       >
-        Briefing: Website Project
-      </Text>
-      <Text
-        fontSize="1rem"
-        mt="0.2rem"
-        mb="2rem"
-        fontWeight="300"
-        color="#cac8c8"
-      >
-        Tiempo para completar: ...
-      </Text>
-      <Flex>
-        <Button
-          bgColor="rgb(226, 90, 90)"
-          _hover={{ bgColor: "rgb(197, 100, 100)" }}
-          color="black"
-          size="sm"
-          fontWeight="200"
-          onClick={() => history.push("/pregunta-1")}
-          onKeyPress={(event) => {
-            if (event.key === "enter") {
-              history.push("/pregunta-1");
-            }
-          }}
-          autoFocus
+        <Image src={DigitalLogo} />
+        <Text
+          fontWeight="600"
+          letterSpacing="1px"
+          fontSize="1.5rem"
+          color="white"
         >
-          Comenzar
-        </Button>
-        <Flex alignItems="center" color="white" ml="1rem">
-          <Text>O pulsa enter</Text>
-          <AiOutlineEnter />
+          Briefing: Website Project
+        </Text>
+        <Text
+          fontSize="1rem"
+          mt="0.2rem"
+          mb="2rem"
+          fontWeight="300"
+          color="#cac8c8"
+        >
+          Tiempo para completar: ...
+        </Text>
+        <Flex>
+          <Button
+            bgColor="rgb(226, 90, 90)"
+            _hover={{ bgColor: "rgb(197, 100, 100)" }}
+            color="black"
+            size="sm"
+            fontWeight="200"
+            onClick={() => history.push("/pregunta-1")}
+            onKeyPress={(event) => {
+              if (event.key === "enter") {
+                history.push("/pregunta-1");
+              }
+            }}
+            autoFocus
+          >
+            Comenzar
+          </Button>
+          <Flex alignItems="center" color="white" ml="1rem">
+            <Text>O pulsa enter</Text>
+            <AiOutlineEnter />
+          </Flex>
         </Flex>
-      </Flex>
+      </MotionBox>
     </Center>
   );
 };

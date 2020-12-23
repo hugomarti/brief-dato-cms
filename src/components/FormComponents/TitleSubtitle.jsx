@@ -6,7 +6,7 @@ export const TitleSubtitle = ({ title, subtitle, errorMessage }) => {
     <Box>
       <FormLabel
         mb="0.5rem"
-        fontSize="2rem"
+        fontSize="1.7rem"
         fontWeight="600"
         letterSpacing="1px"
         htmlFor={title}

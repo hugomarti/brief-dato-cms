@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FastField, useField } from "formik";
 import { Flex, Text, Center, FormControl } from "@chakra-ui/react";
+import { motion } from "framer-motion";
 
 import { Footer } from "./Footer";
 import { ButtonForm } from "../FormComponents/ButtonForm";
@@ -9,6 +10,8 @@ import { InputTextForm } from "../FormComponents/InputTextForm";
 import { RadioBoxForm } from "../FormComponents/RadioBoxForm";
 import { CheckboxForm } from "../FormComponents/CheckboxForm";
 import { AttachDocForm } from "../FormComponents/AttachDocForm";
+
+const MotionBox = motion.custom(Flex);
 
 export const Question = ({
   question,
@@ -46,8 +49,17 @@ export const Question = ({
 
   return (
     <Center mx="1rem" color="white" h="100vh" pos="relative">
-      <Flex w={{ xl: "50%", lg: "50%", md: "50%", base: "90%" }}>
-        <Text fontSize="1.5rem" mr="2rem" mt="0.6rem">
+      <MotionBox
+        initial={{ opacity: 0, y: "200px" }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{
+          ease: "easeIn",
+          y: { duration: 0.5 },
+          opacity: { duration: 1.5 },
+        }}
+        w={{ xl: "50%", lg: "50%", md: "50%", base: "90%" }}
+      >
+        <Text fontSize="1.2rem" mr="2rem" mt="0.6rem">
           {questionNumber}
         </Text>
 
@@ -116,7 +128,7 @@ export const Question = ({
             hidden={value.value}
           />
         </Flex>
-      </Flex>
+      </MotionBox>
       <Footer questionNumber={questionNumber} />
     </Center>
   );
