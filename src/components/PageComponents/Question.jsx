@@ -32,17 +32,25 @@ export const Question = ({
     inputOptions,
     checkbox,
     attachDoc,
+    emailRequired,
   } = question;
 
   const [isDisableButton, setIsDisableButton] = useState(true);
   const [requiredMessage, setRequiredMessage] = useState("");
+  const [emailValidation, setEmailValidation] = useState("");
   const [value] = useField(question.title);
 
   function handleValidation(e) {
     if (!e.target.value && required) {
-      setRequiredMessage("Este campo es obligatorio");
+      setRequiredMessage("Este campo es obligatorio.");
+    }
+    const reg = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (reg.test(e.target.value) === false && emailRequired) {
+      setEmailValidation("Introduce un mail valido.");
+      setIsDisableButton(true);
     } else {
       setRequiredMessage("");
+      setEmailValidation("");
       setIsDisableButton(false);
     }
   }
@@ -71,7 +79,7 @@ export const Question = ({
                   <TitleSubtitle
                     title={title}
                     subtitle={subtitle}
-                    errorMessage={requiredMessage}
+                    errorMessage={requiredMessage || emailValidation}
                   />
 
                   <InputTextForm
@@ -129,6 +137,7 @@ export const Question = ({
           />
         </Flex>
       </MotionBox>
+
       <Footer questionNumber={questionNumber} />
     </Center>
   );

@@ -16,6 +16,7 @@ const HOMEPAGE_QUERY = `query MyQuery {
     radioBox
     attachDoc
     titleSection
+    emailRequired
     inputOptions {
       id
       option

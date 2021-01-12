@@ -52,18 +52,18 @@ export const ButtonForm = ({
     }
   };
   return (
-    <Flex align="center" mt="1.5rem">
+    <Flex
+      align="center"
+      mt="1.5rem"
+      opacity={
+        question.titleSection || lastQuestionMatch ? 100 : handleHiddenBlock
+      }
+    >
       <Flex alignItems="center">
         <Text mr="0.5rem">Pulsa enter</Text>
         <AiOutlineEnter />
       </Flex>
-      <Box
-        opacity={
-          question.titleSection || lastQuestionMatch ? 100 : handleHiddenBlock
-        }
-        ml="1rem"
-        mr="0.5rem"
-      >
+      <Box ml="1rem" mr="0.5rem">
         <Button
           bgColor="rgb(226, 90, 90)"
           _hover={{ bgColor: "rgb(197, 100, 100)" }}
